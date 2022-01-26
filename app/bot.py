@@ -21,21 +21,12 @@ client = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
 
 @app.message("^.*<@{}>.*$".format(os.environ["SLACK_USER_ID"]))
 def message(message):
-    m = Message()
-    row = m.get_by_random()
-
+    
     if freee.is_working():
         return
 
-    # camouflage to avoid being identified as a bot
-    time.sleep(
-        random.choices(
-            [10, 20, 30, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600],
-            [3, 3, 3, 5, 5, 5, 3, 3, 1, 1, 1, 1, 1],
-        )[0]
-    )
 
-    client.chat_postMessage(channel=message["channel"], text=row.body)
+    client.chat_postMessage(channel=message["channel"], text= "すみません、稼働しておりません。稼働しましたら返信いたします。")
 
 
 if __name__ == "__main__":
